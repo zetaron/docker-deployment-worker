@@ -1,0 +1,7 @@
+#!/bin/bash
+set -ex
+
+echo "=> Adding label-schema.org labels"
+echo "LABEL org.label-schema.build-date=\"$(date --rfc-3339=seconds)\" \
+            org.label-schema.vcs-ref=\"${SOURCE_COMMIT}\" \
+            org.label-schema.version=\"${DOCKER_TAG}\"" >> Dockerfile
