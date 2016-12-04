@@ -1,5 +1,7 @@
-FROM alpine:3.4
+FROM docker/compose:1.9.0
 MAINTAINER Fabian Stegemann
+
+ENV DOCKER_MACHINE_VERSION v0.8.2
 
 LABEL org.label-schema.schema-version="1.0" \
       org.label-schema.name="docker-deployment-worker" \
@@ -14,8 +16,8 @@ WORKDIR /var/cache/deployment
 RUN apk add --no-cache \
         curl \
         docker \
-    && curl -L "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-Linux-$(uname -m)" > /usr/bin/docker-compose \
-    && curl -L "https://github.com/docker/machine/releases/download/${DOCKER_MACHINE_VERSION}/docker-machine-$(uname -s)-$(uname -m)" > /usr/bin/docker-machine
+    && curl -L "https://github.com/docker/machine/releases/download/${DOCKER_MACHINE_VERSION}/docker-machine-$(uname -s)-$(uname -m)" > /usr/bin/docker-machine \
+    && chmod +x /usr/bin/docker-machine
 
 COPY secret-wrapper /usr/bin/secret-wrapper
 
